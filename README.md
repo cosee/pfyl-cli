@@ -4,8 +4,9 @@ pfyl-cli is a command-line application for analyzing binaries, extracting static
 * Go (https://golang.org/)
 ## Compile
 ```shell script
-$ git clone https://gitlab.cosee.biz/pfyl/pfyl-cli
+$ git clone git@gitlab.cosee.biz:pfyl/pfyl-cli.git
 $ cd pfyl-cli
+$ go mod download
 $ go build
 ```
 An executable called "pfyl-cli" will be created in the base directory.
