@@ -11,7 +11,9 @@ import (
 func main() {
 	config := configuration.New(afero.NewOsFs())
 	client := external.NewClient(config)
+
 	symbols := analysis.SymbolsProvider(client)
+
 	configureCmd := cmd.NewConfigure(config)
 	rootCmd := cmd.NewRoot(config, cmd.Analyzer(symbols))
 	rootCmd.AddCommands(configureCmd)
