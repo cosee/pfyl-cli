@@ -1,18 +1,0 @@
-
-6
-go.mod,c/4/c47645c391ad0571c40779079363c9d48412e18b
-C
-analysis/symbols.go,4/7/47d679a2b4cd1838d2c500bb535934f8bb245490
-H
-analysis/symbols_test.go,a/b/ab4253320ac5b37926b7261477281ffe84585a69
-7
-main.go,0/6/0607f785dfa3c3861b3239f6723eb276d8056461
-;
-cmd/root.go,c/4/c465f5893973a8e58aa313a12b171bc0b0f15b77
-B
-external/client.go,9/0/90e0da5daeb16a8bc9a8179cb271c0b1f9b28367
-:
-
-.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-9
-	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
