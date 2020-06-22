@@ -15,11 +15,10 @@ IntelliJ IDEA Ultimate supports Go development via a plugin. Just install the Go
 After restarting Intellij, the project can be opened like every other project. <br>
 For analyzing, the GCC-ARM toolchain need to be present locally. <br>
 The toolchain can be found here: https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm <br>
-The toolchain-path is currently still static and not configurable. In cmd/root.go, replace: 
-```go
-const toolchainPath = "..."
+The toolchain can be set via 
+```shell script
+./pfyl-cli configure
 ```
-with the path to your toolchain.<br>
 In the test-folder, an example binary, and the nm-tool exist for testing purposes.
 ## Project Structure
 ### main.go
@@ -30,5 +29,7 @@ Contains all analysis logic. The only analysis operation currently implemented i
 Contains all commands the application provides, as well as the flags which can be used to configure the application.
 ### external
 Contains the http-client to communicate with the backend.
+### configuration
+Contains logic for saving and loading the pfyl-cli configuration from disk.
 ### test
 Contains all data and binaries needed for testing.
