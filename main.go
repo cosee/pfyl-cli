@@ -12,10 +12,11 @@ func main() {
 	config := configuration.New(afero.NewOsFs())
 	client := external.NewClient(config)
 
-	symbols := analysis.SymbolsProvider(client)
+	symbolsAnalyzer := analysis.SymbolsAnalyzerProvider(client)
+	objdumpAnalyzer := analysis.ObjdumpAnalyzerProvider(client)
 
 	configureCmd := cmd.NewConfigure(config)
-	rootCmd := cmd.NewRoot(config, cmd.Analyzer(symbols))
+	rootCmd := cmd.NewRoot(config, symbolsAnalyzer, objdumpAnalyzer)
 	rootCmd.AddCommands(configureCmd)
 	rootCmd.Execute()
 }

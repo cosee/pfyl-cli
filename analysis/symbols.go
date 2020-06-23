@@ -1,16 +1,13 @@
 package analysis
 
 import (
-	"os/exec"
-	"path"
+	"gitlab.cosee.biz/pfyl/pfyl-cli/cmd"
 	"strings"
 )
 
 const (
 	nmBinary = "arm-none-eabi-nm"
 )
-
-type Symbols func(toolchainPath string, binaryPath string) error
 
 type SymbolTableConsumer interface {
 	ConsumeSymbolTable(symbolTable []SymbolTableEntry) error
@@ -22,16 +19,14 @@ type SymbolTableEntry struct {
 	SymbolName string
 }
 
-func SymbolsProvider(consumer SymbolTableConsumer) Symbols {
+func SymbolsAnalyzerProvider(consumer SymbolTableConsumer) cmd.Analyzer {
 	return func(toolchainPath string, binaryPath string) error {
-		nmBinaryPath := path.Join(toolchainPath, nmBinary)
-		command := exec.Command(nmBinaryPath, binaryPath, "-S", "--demangle", "--size-sort", "--defined-only", "--numeric-sort")
-		output, err := command.CombinedOutput()
+		output, err := execute(toolchainPath, nmBinary, binaryPath, "-S", "--demangle", "--size-sort", "--defined-only", "--numeric-sort")
 		if err != nil {
 			return err
 		}
 
-		symbolTable := buildSymbolTable(string(output))
+		symbolTable := buildSymbolTable(output)
 		return consumer.ConsumeSymbolTable(symbolTable)
 	}
 }

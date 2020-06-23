@@ -5,13 +5,18 @@ import (
 	"testing"
 )
 
+const (
+	binariesPath   = "../test/binaries"
+	executablePath = "../test/executables/f7-device"
+)
+
 type SymbolTableConsumerMock func(symbolTable []SymbolTableEntry) error
 
 func (s SymbolTableConsumerMock) ConsumeSymbolTable(symbolTable []SymbolTableEntry) error {
 	return s(symbolTable)
 }
 
-func TestSymbols(t *testing.T) {
+func TestSymbolsAnalyzer(t *testing.T) {
 	assertSymbolTableEntry := func(entry SymbolTableEntry, address string, symbolType string, symbolName string) {
 		assert.Equal(t, address, entry.Address)
 		assert.Equal(t, symbolType, entry.Type)
@@ -26,8 +31,8 @@ func TestSymbols(t *testing.T) {
 			return nil
 		}
 
-		symbols := SymbolsProvider(SymbolTableConsumerMock(mock))
-		err := symbols("../test/binaries", "../test/executables/f7-device")
+		symbolsAnalyzer := SymbolsAnalyzerProvider(SymbolTableConsumerMock(mock))
+		err := symbolsAnalyzer(binariesPath, executablePath)
 		assert.Nil(t, err)
 	})
 }

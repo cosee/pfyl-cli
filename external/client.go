@@ -1,7 +1,6 @@
 package external
 
 import (
-	"fmt"
 	"gitlab.cosee.biz/pfyl/pfyl-cli/analysis"
 	"gitlab.cosee.biz/pfyl/pfyl-cli/configuration"
 )
@@ -15,6 +14,9 @@ func NewClient(config configuration.Configuration) *Client {
 }
 
 func (c *Client) ConsumeSymbolTable(symbolTable []analysis.SymbolTableEntry) error {
-	fmt.Println(symbolTable)
+	return nil
+}
+
+func (c *Client) ConsumeObjdump(objdump string) error {
 	return nil
 }
