@@ -6,6 +6,7 @@ import (
 	"gitlab.cosee.biz/pfyl/pfyl-cli/cmd"
 	"gitlab.cosee.biz/pfyl/pfyl-cli/configuration"
 	"gitlab.cosee.biz/pfyl/pfyl-cli/external"
+	"log"
 )
 
 func main() {
@@ -15,8 +16,9 @@ func main() {
 	symbolsAnalyzer := analysis.SymbolsAnalyzerProvider(client)
 	objdumpAnalyzer := analysis.ObjdumpAnalyzerProvider(client)
 
-	configureCmd := cmd.NewConfigure(config)
 	rootCmd := cmd.NewRoot(config, symbolsAnalyzer, objdumpAnalyzer)
-	rootCmd.AddCommands(configureCmd)
-	rootCmd.Execute()
+	rootCmd.AddCommand(cmd.NewConfigure(config))
+	if err := rootCmd.Execute(); err != nil {
+		log.Fatal(err)
+	}
 }

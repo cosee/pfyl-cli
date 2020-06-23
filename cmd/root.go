@@ -8,12 +8,9 @@ import (
 
 type Analyzer func(toolchainPath string, binaryPath string) error
 
-type Root struct {
-	command *cobra.Command
-}
 
-func NewRoot(config configuration.Configuration,analyzers ...Analyzer) *Root {
-	command := &cobra.Command{
+func NewRoot(config configuration.Configuration,analyzers ...Analyzer) *cobra.Command {
+	return &cobra.Command{
 		Use:   "pfyl-cli",
 		Short: "pfyl-cli analyzes binaries and sends results to a pfyl-server",
 		Run: func(cmd *cobra.Command, args []string) {
@@ -24,17 +21,5 @@ func NewRoot(config configuration.Configuration,analyzers ...Analyzer) *Root {
 				}
 			}
 		},
-	}
-
-	return &Root{command: command}
-}
-
-func (r *Root) AddCommands(commands ...*cobra.Command) {
-	r.command.AddCommand(commands...)
-}
-
-func (r *Root) Execute() {
-	if err := r.command.Execute(); err != nil {
-		log.Fatal(err)
 	}
 }
