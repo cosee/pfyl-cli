@@ -15,8 +15,9 @@ func main() {
 
 	symbolsAnalyzer := analysis.SymbolsAnalyzerProvider(client)
 	objdumpAnalyzer := analysis.ObjdumpAnalyzerProvider(client)
+	sectionsAnalyzer := analysis.SectionsAnalyzerProvider(client)
 
-	rootCmd := cmd.NewRoot(config, symbolsAnalyzer, objdumpAnalyzer)
+	rootCmd := cmd.NewRoot(config, symbolsAnalyzer, objdumpAnalyzer, sectionsAnalyzer)
 	rootCmd.AddCommand(cmd.NewConfigure(config))
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatal(err)

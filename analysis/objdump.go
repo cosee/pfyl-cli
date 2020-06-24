@@ -18,12 +18,12 @@ func ObjdumpAnalyzerProvider(consumer ObjdumpConsumer) cmd.Analyzer {
 			return err
 		}
 
-		strippedObjdump := stripHeader(output)
+		strippedObjdump := stripObjdumpHeader(output)
 		return consumer.ConsumeObjdump(strippedObjdump)
 	}
 }
 
-func stripHeader(output string) string {
+func stripObjdumpHeader(output string) string {
 	stripped := strings.Split(output, ".text:")[1]
 	trimmedAndStrippedObjdump := strings.TrimSpace(stripped)
 	return trimmedAndStrippedObjdump

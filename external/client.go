@@ -20,3 +20,7 @@ func (c *Client) ConsumeSymbolTable(symbolTable []analysis.SymbolTableEntry) err
 func (c *Client) ConsumeObjdump(objdump string) error {
 	return nil
 }
+
+func (c *Client) ConsumeSectionTable(table analysis.SectionsTable) error {
+	return nil
+}
