@@ -12,9 +12,11 @@ func NewRoot(config configuration.Configuration, analyzers ...Analyzer) *cobra.C
 	return &cobra.Command{
 		Use:   "pfyl-cli [program]",
 		Short: "pfyl-cli analyzes a program and sends the results to your pfyl-server",
+		Args: cobra.ExactArgs(1),
 		Run: func(cmd *cobra.Command, args []string) {
+			binaryPath := args[0]
 			for _, analyzer := range analyzers {
-				err := analyzer(config.ToolChainPath, "test/executables/f7-device")
+				err := analyzer(config.ToolChainPath, binaryPath)
 				if err != nil {
 					log.Print(err)
 				}
